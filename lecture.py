@@ -1,4 +1,5 @@
 # PART 1
+import math
 def is_palindrome(s):
     # Check if a string is a palindrome or not.
     # To make it simple, let's assume that an empty string is a palindrome.
@@ -8,12 +9,20 @@ def is_palindrome(s):
     elif s[0] != s[-1]:
         return False  # base case 2
     else:
-        return is_palindrome(s[1:-1]) # recursive case
+        # recursive case
+        # -1 and then half it to get the index of the middle element in an odd one.
+        # 101           len=3
+        # 1001          len=4
 
-    # TODO: test_palindrome_long() will trigger RecursionError. Can you fix it by rewriting the above code?
-    # HINT: You can use a loop to replace the recursive call.
-    # TODO: How do you check if your fix is correct?
+        stack = []
+        # Pushing phase
+        for x in range(len(s) // 2):
+            stack.append(s[x])
+        for x in range(math.ceil(len(s) / 2), len(s)):
+            if(stack[-1] == s[x]):
+                stack.pop()
 
+        return stack == []
 
 # PART 2
 def is_small(a):
